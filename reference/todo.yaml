@@ -1,0 +1,50 @@
+
+openapi: 3.1.0
+info:
+  title: todo
+  version: '1.0'
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /items:
+    get:
+      summary: Get TODO items
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TodoItem'
+              examples: {}
+      operationId: v1.getItems
+      description: Return a list of todo items
+components:
+  schemas:
+    TodoItem:
+      title: TodoItem
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+          x-faker: lorem.sentence
+        description:
+          type:
+            - string
+            - 'null'
+        done:
+          type: boolean
+      required:
+        - id
+        - title
+        - description
+        - done
+      description: Todo Item
